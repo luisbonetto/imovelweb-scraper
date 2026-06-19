@@ -24,7 +24,7 @@ chrome_options = Options()
 chrome_options.add_argument("--start-maximized")
 chrome_options.add_argument("--disable-gpu")
 # Se quiser rodar sem abrir a janela do navegador em segundo plano, descomente a linha abaixo:
-# chrome_options.add_argument("--headless") 
+# chrome_options.add_argument("--headless")
 
 # Inicia o navegador automatizado
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
@@ -73,46 +73,3 @@ for i, card in enumerate(cards, 1):
     time.sleep(1)
 
 print("\nProcesso concluído! Verifique a planilha de respostas do seu Google Forms.")
-
-
-
-
-
-
-
-# lista_propriedades = []
-#
-# print(f"\nForam encontrados {len(cards)} imóveis nesta página.\n")
-#
-# for card in cards:
-#     # Extrai o link (O atributo data-to-posting traz o caminho relativo)
-#     link_relativo = card.get("data-to-posting")
-#     link_completo = f"https://www.imovelweb.com.br{link_relativo}"
-#
-#     # Extrai o valor do aluguel mensal usando a tag de QA do Imovelweb
-#     preco_element = card.find(attrs={"data-qa": "POSTING_CARD_PRICE"})
-#     valor_mes = preco_element.text.strip() if preco_element else "Valor não informado"
-#
-#     # Extrai a localização/endereço (Geralmente fica na tag de localização de QA do card)
-#     # Caso a tag mude, buscamos pelo componente que descreve a localização no topo/corpo do card
-#     loc_element = card.find(attrs={"data-qa": "POSTING_CARD_LOCATION"})
-#     if not loc_element:
-#         # Fallback caso mudem o padrão da tag de localização
-#         loc_element = card.find(class_=lambda x: x and 'Location' in x)
-#
-#     endereco = loc_element.text.strip() if loc_element else "Endereço indisponível no card"
-#
-#     # Adiciona o dicionário estruturado à lista
-#     lista_propriedades.append({
-#         "endereco": endereco,
-#         "valor": valor_mes,
-#         "link": link_completo
-#     })
-#
-# # 3. Exibe o resultado formatado na tela
-# for i, prop in enumerate(lista_propriedades, 1):
-#     print(f"Propriedade #{i}")
-#     print(f"📍 Endereço: {prop['endereco']}")
-#     print(f"💰 Valor/Mês: {prop['valor']}")
-#     print(f"🔗 Link: {prop['link']}")
-#     print("-" * 60)
